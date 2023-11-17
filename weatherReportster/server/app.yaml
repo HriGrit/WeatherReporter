@@ -7,4 +7,4 @@ automatic_scaling:
 
 env_variables:
   NODE_ENV: "production"
-  API_KEY: "59b75765d73b8a74d2baba3f0b5458b2"
+  API_KEY: 59b75765d73b8a74d2baba3f0b5458b2

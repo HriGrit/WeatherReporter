@@ -8,6 +8,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.get("/", (req, res) => {
+	console.log(process.env.API_KEY);
 	const name = process.env.NAME || "World";
 	res.send(`Hey ${name}!`);
 });

@@ -1,0 +1,9 @@
+{
+	"routes": [
+		{
+			"header": {
+				"Access-Control-Allow-Origin": "*"
+			}
+		}
+	]
+}

@@ -8,25 +8,27 @@ const SearchBar = ({ location }) => {
 
     const apisender = async (location) => {
         if (location.latitude === 0 && location.longitude === 0) {
-            setPlace({ city: 'Antarctic', state: 'Antarctic' });
+            setPlace({ city: 'Antartic', state: 'Antartic' })
         } else {
-            try {
-                const response = await axios({
-                    method: 'post',
-                    url: 'https://weather-reporter-coral.vercel.app/zip',
-                    data: {
-                        lat: location.latitude,
-                        lon: location.longitude
-                    },
-                    // Only include if you need to send/receive cookies or auth headers
-                    withCredentials: true
+            let lat = location.latitude
+            let lon = location.longitude
+            await axios.post("https://weather-reporter-coral.vercel.app/zip",
+                {
+                    lat: lat,
+                    lon: lon
+                },
+                {
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                },
+                { withCredentials: true }).then((response) => {
+                    setPlace({ city: response.data.city, state: response.data.state })
+                }).catch((error) => {
+                    console.log(error);
                 });
-                setPlace({ city: response.data[0].name, state: response.data[0].state });
-            } catch (error) {
-                console.error('Error fetching the location:', error);
-            }
         }
-    };
+    }
 
     useEffect(() => {
         apisender(location)

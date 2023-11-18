@@ -12,9 +12,18 @@ const corsOptions = {
 	allowedHeaders: ["Content-Type", "Authorization"], // or specify headers to allow
 };
 
-app.use(cors(corsOptions));
+// app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+app.use((req, res, next) => {
+	res.header("Access-Control-Allow-Origin", "http://localhost:5173");
+	res.header(
+		"Access-Control-Allow-Headers",
+		"Origin, X-Requested-With, Content-Type, Accept"
+	);
+	next();
+});
 
 app.get("/", (req, res) => {
 	console.log(process.env.API_KEY);
@@ -84,11 +93,11 @@ app.get("/api", async (req, res) => {
 });
 
 // save 5 days weather data here
-var fivedayweather = [];
 
 // call by lat and long
 app.get("/5day-zip-fetch", async (req, res) => {
 	//https://api.openweathermap.org/data/3.0/onecall?lat=33.44&lon=-94.04&appid={API key}
+	var fivedayweather = [];
 	const { lat, long } = req.body;
 	console.log(lat, long);
 	await axios
@@ -113,6 +122,7 @@ app.get("/5day-zip-fetch", async (req, res) => {
 // call by city name
 app.get("/5day-api-fetch", async (req, res) => {
 	//https://api.openweathermap.org/data/2.5/forecast?q=London&appid={API key}
+	var fivedayweather = [];
 	const { place } = req.body;
 	console.log(place);
 	await axios

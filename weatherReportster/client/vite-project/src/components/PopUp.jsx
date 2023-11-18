@@ -2,12 +2,13 @@ import React from 'react'
 import { useState } from 'react'
 import LocationService from '../utils/LocationService'
 
-const PopUp = ({ cancelPopup, setLocation, location }) => {
+const PopUp = ({ cancelPopup, setLocation, location, setOnce }) => {
     const [error, setError] = useState(null);
     const [clicked, setClicked] = useState(false)
 
     const handleLocation = () => {
-        setClicked(true)
+        setOnce(true);
+        setClicked(true);
         LocationService(
             (newLocation) => {
                 setLocation(newLocation);

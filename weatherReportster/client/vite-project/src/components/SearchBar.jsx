@@ -51,7 +51,7 @@ const SearchBar = ({ location, setLocation, setRefresh }) => {
                 },
             };
             setFormData({ lat: localStorage.getItem("latitude"), long: localStorage.getItem("longitude") });
-            await axios.post("http://localhost:8080/zip", formData, config).then((response) => {
+            await axios.post("https://weather-reporter-coral.vercel.app/zip", formData, config).then((response) => {
                 localStorage.setItem('name', response.data[0].name);
                 setPlace({ city: response.data[0].name, state: response.data[0].country })
                 setCoordinates(convertCoordinatesToDMS());
@@ -67,7 +67,7 @@ const SearchBar = ({ location, setLocation, setRefresh }) => {
                 'Content-Type': 'application/json',
             },
         };
-        await axios.get(`http://localhost:8080/api?name=${name}`, config).then((response) => {
+        await axios.get(`https://weather-reporter-coral.vercel.app/api?name=${name}`, config).then((response) => {
             console.log(response.data);
             setDropdowndata(response.data);
         }).catch((error) => {

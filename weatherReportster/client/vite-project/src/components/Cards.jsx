@@ -30,12 +30,12 @@ const Cards = ({ location, once, refresh, setRefresh }) => {
             },
         };
         setFormData({ lat: location.latitude, long: location.longitude });
-        await axios.get(`http://localhost:8080/5day-zip-fetch?lat=${location.latitude}&long=${location.longitude}`, formData, config).then((response) => {
+        await axios.get(`https://weather-reporter-coral.vercel.app/5day-zip-fetch?lat=${location.latitude}&long=${location.longitude}`, formData, config).then((response) => {
             setData(response.data);
         }).catch((error) => {
             console.log(error);
         });
-        await axios.get(`http://localhost:8080/current-zip-fetch?lat=${location.latitude}&long=${location.longitude}`, formData, config).then((response) => {
+        await axios.get(`https://weather-reporter-coral.vercel.app/current-zip-fetch?lat=${location.latitude}&long=${location.longitude}`, formData, config).then((response) => {
             setNowData(response.data);
         }).catch((error) => {
             console.log(error);

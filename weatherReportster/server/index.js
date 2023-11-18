@@ -3,7 +3,16 @@ const app = express();
 const axios = require("axios");
 const cors = require("cors");
 
-app.use(cors());
+require("dotenv").config();
+
+const corsOptions = {
+	origin: "http://localhost:5173", // or use '*' to allow any origin
+	methods: ["GET", "POST", "DELETE"], // or use specific methods
+	credentials: true, // enable set cookie
+	allowedHeaders: ["Content-Type", "Authorization"], // or specify headers to allow
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -15,7 +24,7 @@ app.get("/", (req, res) => {
 
 // if navigator location succesful
 // zip call is for lat and long
-app.get("/zip", async (req, res) => {
+app.post("/zip", async (req, res) => {
 	// http://api.openweathermap.org/geo/1.0/reverse?lat={lat}&lon={lon}&limit={limit}&appid={API key}
 	const { lat, long } = req.body;
 	console.log(lat, long);

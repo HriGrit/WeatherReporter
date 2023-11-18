@@ -1,7 +1,9 @@
+import HomePage from "./pages/HomePage"
+
 function App() {
   return (
     <>
-      <h2>Lets try server Call</h2>
+      <HomePage />
     </>
   )
 }
